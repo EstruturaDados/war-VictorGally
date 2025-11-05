@@ -28,6 +28,7 @@
 // Funções de interface com o usuário:
 // Funções de lógica principal do jogo:
 // Função utilitária:
+#include <stdio.h>
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
@@ -38,6 +39,33 @@ int main() {
     // - Aloca a memória para o mapa do mundo e verifica se a alocação foi bem-sucedida.
     // - Preenche os territórios com seus dados iniciais (tropas, donos, etc.).
     // - Define a cor do jogador e sorteia sua missão secreta.
+
+typedef struct 
+
+{
+    char Territorio[50];
+    char Cor[15];
+    int exercito;
+    /* data */
+}Exercito;
+
+int x = 10;
+int* p = &x; //O ponteiro 'p' recebe o endereço de 'x''
+*p = 20; // Modificando o valor através do ponteiro
+
+printf("Valor de x: %d\n", x);
+printf("endereço de x: %p\n", &x);
+printf("Conteudo de p (o endereço): %p\n", p);
+printf("Valor apontado por p: %d\n", *p);
+printf("Novo valor de x: %d\n", x); // Vai imprimir 20
+
+int *a, b;
+b = 10;
+a = (int*) malloc(sizeof(int)); // Pedimos um espaço
+*a = 20;
+free(a); // Erro! Tentando liberar memória estárica
+a = &b; //Erro! Perdemos a referência do espaço alocado
+
 
     // 2. Laço Principal do Jogo (Game Loop):
     // - Roda em um loop 'do-while' que continua até o jogador sair (opção 0) ou vencer.
