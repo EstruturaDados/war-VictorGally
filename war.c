@@ -29,43 +29,63 @@
 // Funções de lógica principal do jogo:
 // Função utilitária:
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
+// Definicao da struct Territorio usando typedef para simplificar a declaracao
+typedef struct {
+    char nome[30];
+    char cor[10];
+    int tropas;
+} Territorio; // Agora podemos usar apenas 'Territorio' como tipo
+
+// Funcao para cadastrar os territorios
+void cadastrar_territorios(Territorio t[], int quantidade) {
+    printf("--- Cadastro de Territorios ---\n");
+    for (int i = 0; i < quantidade; i++) {
+        printf("\nTerritorio %d:\n", i + 1);
+        printf("Nome: ");
+        // Uso de scanf para ler o nome (ate 29 caracteres ou nova linha)
+        scanf("%s", t[i].nome); 
+        printf("Cor do exercito: ");
+        scanf("%s", t[i].cor);
+        printf("Numero de tropas: ");
+        scanf("%d", &t[i].tropas);
+    }
+}
+
+// Funcao para exibir os dados dos territorios
+void exibir_territorios(Territorio t[], int quantidade) {
+    printf("\n--- Informacoes dos Territorios Registrados ---\n");
+    for (int i = 0; i < quantidade; i++) {
+        printf("\nTerritorio %d:\n", i + 1);
+        printf("Nome: %s\n", t[i].nome);
+        printf("Cor do exercito: %s\n", t[i].cor);
+        printf("Numero de tropas: %d\n", t[i].tropas);
+    }
+}
+
 int main() {
+    // Definicao do numero de territorios a serem cadastrados
+    const int NUM_TERRITORIOS = 5;
+    
+    // Declaracao de um array de structs para armazenar os 5 territorios
+    Territorio territorios[NUM_TERRITORIOS];
+
+    // Chama a funcao para cadastrar os territorios
+    cadastrar_territorios(territorios, NUM_TERRITORIOS);
+
+    // Chama a funcao para exibir os dados
+    exibir_territorios(territorios, NUM_TERRITORIOS);
+
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
     // - Inicializa a semente para geração de números aleatórios com base no tempo atual.
     // - Aloca a memória para o mapa do mundo e verifica se a alocação foi bem-sucedida.
     // - Preenche os territórios com seus dados iniciais (tropas, donos, etc.).
     // - Define a cor do jogador e sorteia sua missão secreta.
-
-typedef struct 
-
-{
-    char Territorio[50];
-    char Cor[15];
-    int exercito;
-    /* data */
-}Exercito;
-
-int x = 10;
-int* p = &x; //O ponteiro 'p' recebe o endereço de 'x''
-*p = 20; // Modificando o valor através do ponteiro
-
-printf("Valor de x: %d\n", x);
-printf("endereço de x: %p\n", &x);
-printf("Conteudo de p (o endereço): %p\n", p);
-printf("Valor apontado por p: %d\n", *p);
-printf("Novo valor de x: %d\n", x); // Vai imprimir 20
-
-int *a, b;
-b = 10;
-a = (int*) malloc(sizeof(int)); // Pedimos um espaço
-*a = 20;
-free(a); // Erro! Tentando liberar memória estárica
-a = &b; //Erro! Perdemos a referência do espaço alocado
-
 
     // 2. Laço Principal do Jogo (Game Loop):
     // - Roda em um loop 'do-while' que continua até o jogador sair (opção 0) ou vencer.
