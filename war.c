@@ -29,17 +29,18 @@
 // Funções de lógica principal do jogo:
 // Função utilitária:
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <stdlib.h>   // Para malloc, calloc e free
+#include <time.h>     
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
 // Definicao da struct Territorio usando typedef para simplificar a declaracao
+// Definição da struct Território
 typedef struct {
-    char nome[30];
-    char cor[10];
+    char nome[50];
+    char cor_exercito[20];
     int tropas;
-} Territorio; // Agora podemos usar apenas 'Territorio' como tipo
+} Territorio;
 
 // Funcao para cadastrar os territorios
 void cadastrar_territorios(Territorio t[], int quantidade) {
@@ -50,7 +51,7 @@ void cadastrar_territorios(Territorio t[], int quantidade) {
         // Uso de scanf para ler o nome (ate 29 caracteres ou nova linha)
         scanf("%s", t[i].nome); 
         printf("Cor do exercito: ");
-        scanf("%s", t[i].cor);
+        scanf("%s", t[i].cor_exercito);
         printf("Numero de tropas: ");
         scanf("%d", &t[i].tropas);
     }
@@ -62,7 +63,7 @@ void exibir_territorios(Territorio t[], int quantidade) {
     for (int i = 0; i < quantidade; i++) {
         printf("\nTerritorio %d:\n", i + 1);
         printf("Nome: %s\n", t[i].nome);
-        printf("Cor do exercito: %s\n", t[i].cor);
+        printf("Cor do exercito: %s\n", t[i].cor_exercito);
         printf("Numero de tropas: %d\n", t[i].tropas);
     }
 }
@@ -95,6 +96,7 @@ int main() {
     //   - Opção 2: Verifica se a condição de vitória foi alcançada e informa o jogador.
     //   - Opção 0: Encerra o jogo.
     // - Pausa a execução para que o jogador possa ler os resultados antes da próxima rodada.
+    // Lembre-se de liberar a memória alocada dinamicamente
 
     // 3. Limpeza:
     // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
